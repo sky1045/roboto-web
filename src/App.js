@@ -1,8 +1,23 @@
 import React from 'react';
 import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
+import Header from './components/Header';
+import MainPage from './pages/MainPage';
+import DarkTheme from './themes/DarkTheme';
+import { ThemeProvider } from '@material-ui/styles';
+//import { Counter } from './features/counter/Counter';
 import './App.css';
 
+function App() {
+  return (
+    <ThemeProvider theme={DarkTheme}>
+      <div className="App">
+        <Header />
+        <MainPage />
+      </div>
+    </ThemeProvider>
+  )
+}
+/*
 function App() {
   return (
     <div className="App">
@@ -54,5 +69,6 @@ function App() {
     </div>
   );
 }
+*/
 
 export default App;
