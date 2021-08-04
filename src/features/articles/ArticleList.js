@@ -13,6 +13,10 @@ import {
   Paper,
   Typography
 } from '@material-ui/core';
+import { store } from '../../app/store';
+import { fetchArticles } from './ArticleSlice'
+
+store.dispatch(fetchArticles())
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
