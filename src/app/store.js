@@ -5,6 +5,6 @@ import articleReducer from '../features/articles/ArticleSlice'
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
-    article: articleReducer,
+    articles: articleReducer,
   },
 });

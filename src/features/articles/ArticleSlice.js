@@ -21,17 +21,32 @@ export const articleSlice = createSlice({
     name: 'articles',
     initialState,
     reducers: {
+        articleChecked(state, action) {
+            const id = action.payload
+            const article = state.entities[id]
+        },
     },
     extraReducers: (builder) => {
         builder
             .addCase(fetchArticles.pending, (state, action) => {
                 state.status = 'loading'
             })
-            .addCase(fetchArticles, (state, action) => {
+            .addCase(fetchArticles.fulfilled, (state, action) => {
                 articlesAdapter.setAll(state, action.payload)
+                console.log(state.ids)
                 state.status = 'idle'
             })
     }
 })
 
 export default articleSlice.reducer
+
+export const {
+    selectAll: selectArticles,
+    selectById: selectArticleById,
+} = articlesAdapter.getSelectors((state) => state.articles)
+
+export const selectArticleIds = createSelector(
+    selectArticles,
+    (articles) => articles.map((article) => article.id)
+)

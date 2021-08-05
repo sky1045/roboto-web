@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 import { DataGrid } from '@material-ui/data-grid'
 import DarkTheme from '../../themes/DarkTheme';
 import { 
@@ -14,7 +15,11 @@ import {
   Typography
 } from '@material-ui/core';
 import { store } from '../../app/store';
-import { fetchArticles } from './ArticleSlice'
+import {
+  fetchArticles,
+  selectArticles,
+} from './ArticleSlice'
+import ArticleRow from './ArticleRow'
 
 store.dispatch(fetchArticles())
 
@@ -36,17 +41,6 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
 
   const useStyles = makeStyles((theme) => ({
     item: {
@@ -60,6 +54,7 @@ const rows = [
 
   const ArticleList = () => {
     const classes = useStyles()
+    const rows = useSelector(selectArticles)
       return (
         <div style={{ height: 400, width: '100%' }}>
           <div className={classes.spacer} />
@@ -70,24 +65,15 @@ const rows = [
             <Table className={classes.table} aria-label="customized table">
               <TableHead>
                 <TableRow>
-                  <StyledTableCell>Dessert (100g serving)</StyledTableCell>
-                  <StyledTableCell align="right">Calories</StyledTableCell>
-                  <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
-                  <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
-                  <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
+                  <StyledTableCell>id</StyledTableCell>
+                  <StyledTableCell align="right">title</StyledTableCell>
+                  <StyledTableCell align="right">created_at</StyledTableCell>
+                  <StyledTableCell align="right">updated_at</StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {rows.map((row) => (
-                  <StyledTableRow key={row.name}>
-                    <StyledTableCell component="th" scope="row">
-                      {row.name}
-                    </StyledTableCell>
-                    <StyledTableCell align="right">{row.calories}</StyledTableCell>
-                    <StyledTableCell align="right">{row.fat}</StyledTableCell>
-                    <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-                    <StyledTableCell align="right">{row.protein}</StyledTableCell>
-                  </StyledTableRow>
+                  <ArticleRow row={row} />
                 ))}
               </TableBody>
             </Table>
