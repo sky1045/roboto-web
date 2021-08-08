@@ -71,7 +71,7 @@ const StyledTableRow = withStyles((theme) => ({
               </TableHead>
               <TableBody>
                 {rows.map((row) => (
-                  <ArticleRow row={row} />
+                  <ArticleRow row={row} key={row.id} />
                 ))}
               </TableBody>
             </Table>

@@ -10,7 +10,7 @@ const getArticles = async () => {
 
 const getArticle = async (id) => {
     try {
-        return await axios.get('http://localhost:8000/' + id)
+        return await axios.get('http://localhost:8080/' + id)
     } catch(err) {
         throw err
     }
