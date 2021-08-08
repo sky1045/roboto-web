@@ -8,6 +8,15 @@ const getArticles = async () => {
     }
 }
 
+const getArticle = async (id) => {
+    try {
+        return await axios.get('http://localhost:8000/' + id)
+    } catch(err) {
+        throw err
+    }
+}
+
 export {
-    getArticles
+    getArticles,
+    getArticle,
 }

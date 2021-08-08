@@ -27,14 +27,15 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: 'auto',
     },
     tooltipText: {
-    }
+    },
+    spacer: theme.mixins.toolbar,
 }))
 
 const Header = () => {
     const classes = useStyles()
     return (
         <header>
-            <AppBar position="absolute">
+            <AppBar position="absolute" className={classes.header}>
                 <Toolbar variant="dense">
                     <IconButton aria-label="menu" edge="start" className={classes.logo}>
                         ROBOTO
@@ -48,6 +49,7 @@ const Header = () => {
                     </div>
                 </Toolbar>
             </AppBar>
+            <div className={classes.spacer} />
         </header>
     )
 }

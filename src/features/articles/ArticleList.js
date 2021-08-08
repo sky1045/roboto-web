@@ -49,7 +49,6 @@ const StyledTableRow = withStyles((theme) => ({
     table: {
       minWidth: 700,
     },
-    spacer: theme.mixins.toolbar
   }))
 
   const ArticleList = () => {
@@ -57,7 +56,6 @@ const StyledTableRow = withStyles((theme) => ({
     const rows = useSelector(selectArticles)
       return (
         <div style={{ height: 400, width: '100%' }}>
-          <div className={classes.spacer} />
           <Typography variant="h3" gutterBottom>
             Article List
           </Typography>

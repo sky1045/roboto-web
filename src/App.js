@@ -4,6 +4,8 @@ import Header from './components/Header';
 import MainPage from './pages/MainPage';
 import DarkTheme from './themes/DarkTheme';
 import { ThemeProvider } from '@material-ui/styles';
+import { Route } from 'react-router-dom'
+import ArticlePage from './pages/ArticlePage'
 //import { Counter } from './features/counter/Counter';
 import './App.css';
 
@@ -12,7 +14,8 @@ function App() {
     <ThemeProvider theme={DarkTheme}>
       <div className="App">
         <Header />
-        <MainPage />
+        <Route path="/" component={MainPage} exact />
+        <Route path="/article" component={ArticlePage} />
       </div>
     </ThemeProvider>
   )
