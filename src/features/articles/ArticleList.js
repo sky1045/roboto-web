@@ -5,6 +5,7 @@ import DarkTheme from '../../themes/DarkTheme';
 import { 
   withStyles,
   makeStyles,
+  Button,
   Table,
   TableBody,
   TableCell,
@@ -49,13 +50,14 @@ const StyledTableRow = withStyles((theme) => ({
     table: {
       minWidth: 700,
     },
+    spacer: theme.mixins.toolbar,
   }))
 
   const ArticleList = () => {
     const classes = useStyles()
     const rows = useSelector(selectArticles)
       return (
-        <div style={{ height: 400, width: '100%' }}>
+        <div style={{ height: '40vh', width: '100%' }}>
           <Typography variant="h3" gutterBottom>
             Article List
           </Typography>

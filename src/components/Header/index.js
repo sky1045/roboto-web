@@ -12,6 +12,9 @@ import {
     createMuiTheme,
 } from '@material-ui/core'
 
+import { Link } from 'react-router-dom'
+import { Link as LinkButton } from '@material-ui/core'
+
 const useStyles = makeStyles((theme) => ({
     logo: {
         margin: 0,
@@ -37,9 +40,11 @@ const Header = () => {
         <header>
             <AppBar position="absolute" className={classes.header}>
                 <Toolbar variant="dense">
-                    <IconButton aria-label="menu" edge="start" className={classes.logo}>
-                        ROBOTO
-                    </IconButton>
+                    <LinkButton component={Link} to="/">
+                        <IconButton aria-label="menu" edge="start" className={classes.logo}>
+                            ROBOTO
+                        </IconButton>
+                    </LinkButton>
                     <div className={classes.right}>
                         <Tooltip title="login">
                             <Button className={classes.tooltipText}>

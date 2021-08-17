@@ -5,18 +5,13 @@ import {
     Grid,
     makeStyles
 } from '@material-ui/core'
+import PageStyle from '../../components/styles/PageStyle'
 
-const useStyles = makeStyles((theme) => ({
-    page: {
-        height: '100vh',
-        padding: "48px 0"
-    }
-}))
+const useStyles = PageStyle
 
-const ArticlePage = (props) => {
+const ArticleDetail = (props) => {
     const classes = useStyles()
-    console.log(props)
-    console.log(props.params)
+    console.log(classes)
     const { id } = props.match.params
     return (
         <Container maxWidth="lg" className={classes.page}>
@@ -29,4 +24,4 @@ const ArticlePage = (props) => {
     )
 }
 
-export default ArticlePage
+export default ArticleDetail
