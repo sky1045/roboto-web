@@ -4,7 +4,10 @@ import {
     createSelector,
     createEntityAdapter,
 } from '@reduxjs/toolkit'
-import { getArticles } from './ArticleAPI'
+import { 
+    getArticles,
+    createArticle
+} from './ArticleAPI'
 
 const articlesAdapter = createEntityAdapter()
 
@@ -14,6 +17,11 @@ const initialState = articlesAdapter.getInitialState({
 
 export const fetchArticles = createAsyncThunk('articles/fetchArticles', async () => {
     const response = await getArticles()
+    return response.data
+})
+
+export const saveNewArticle = createAsyncThunk('articles/createArticle', async (data) => {
+    const response = await createArticle(data)
     return response.data
 })
 
@@ -33,9 +41,9 @@ export const articleSlice = createSlice({
             })
             .addCase(fetchArticles.fulfilled, (state, action) => {
                 articlesAdapter.setAll(state, action.payload)
-                console.log(state.ids)
                 state.status = 'idle'
             })
+            .addCase(saveNewArticle.fulfilled, articlesAdapter.addOne)
     }
 })
 

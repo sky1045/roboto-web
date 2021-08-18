@@ -16,7 +16,16 @@ const getArticle = async (id) => {
     }
 }
 
+const createArticle = async (data) => {
+    try {
+        return await axios.post('http://localhost:8080/article', data)
+    } catch(err) {
+        throw err
+    }
+}
+
 export {
     getArticles,
     getArticle,
+    createArticle
 }
