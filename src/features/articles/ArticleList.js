@@ -57,7 +57,7 @@ const StyledTableRow = withStyles((theme) => ({
     const classes = useStyles()
     const rows = useSelector(selectArticles)
       return (
-        <div style={{ height: '40vh', width: '100%' }}>
+        <div style={{  width: '100%' }}>
           <Typography variant="h3" gutterBottom>
             Article List
           </Typography>

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/styles';
 import { 
     TableCell,
@@ -30,7 +31,11 @@ const ArticleRow = (props) => {
             <StyledTableCell component="th" scope="row">
                 {row.id}
             </StyledTableCell>
-            <StyledTableCell align="right">{row.title}</StyledTableCell>
+            <StyledTableCell align="right">
+              <Link to={"/article/" + row.id} style={{ textDecoration: 'none', color: 'inherit'}}>
+                {row.title}
+              </Link>
+            </StyledTableCell>
             <StyledTableCell align="right">{row.createdAt}</StyledTableCell>
             <StyledTableCell align="right">{row.updatedAt}</StyledTableCell>
         </StyledTableRow>
