@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 import { 
     Input,
     makeStyles,
@@ -23,11 +24,12 @@ const ArticleForm = (props) => {
     const [title, setTitle] = useState("")
     const [content, setContent] = useState("## MarkDown으로 작성해주세요");
     const dispatch = useDispatch()
+    const history = useHistory()
 
     const handleSubmit = async (event) => {
         event.preventDefault()
-        console.log(title, content)
         await dispatch(saveNewArticle({title, content}))
+        history.push('/')
     }
 
     return (
