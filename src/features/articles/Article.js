@@ -13,9 +13,11 @@ const Article = (props) => {
         const { data } = await getArticle(id)
         setArticle(data)
     }
+
     useEffect(() => {
         fetchData(id)
     }, [id])
+
     return (
         <div style={{ height: 400, width: '100%' }}>
             <Typography variant="h4">{article.title}</Typography>

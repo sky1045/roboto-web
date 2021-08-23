@@ -1,5 +1,5 @@
 import React from 'react'
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { DataGrid } from '@material-ui/data-grid'
 import DarkTheme from '../../themes/DarkTheme';
 import { 
@@ -19,8 +19,10 @@ import { store } from '../../app/store';
 import {
   fetchArticles,
   selectArticles,
+  getPageInfo,
 } from './ArticleSlice'
 import ArticleRow from './ArticleRow'
+import Paging from '../../components/Paging'
 
 store.dispatch(fetchArticles())
 
@@ -54,8 +56,15 @@ const StyledTableRow = withStyles((theme) => ({
   }))
 
   const ArticleList = () => {
+    const dispatch = useDispatch()
     const classes = useStyles()
     const rows = useSelector(selectArticles)
+    const { page, count } = useSelector(getPageInfo)
+
+    const setPage = (page) => {
+      dispatch(fetchArticles(page))
+    }
+
       return (
         <div style={{  width: '100%' }}>
           <Typography variant="h3" gutterBottom>
@@ -78,6 +87,7 @@ const StyledTableRow = withStyles((theme) => ({
               </TableBody>
             </Table>
           </TableContainer>
+          <Paging page={page} count={count} setPage={setPage}/>
         </div>
       )
   }

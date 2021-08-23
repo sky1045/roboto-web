@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const getArticles = async () => {
+const getArticles = async (page) => {
     try {
-        return await axios.get('http://localhost:8080/article')
+        return await axios.get('http://localhost:8080/article?page='+(page-1))
     } catch(err) {
         throw err
     }

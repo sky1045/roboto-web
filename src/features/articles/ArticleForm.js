@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
+import { unwrapResult } from '@reduxjs/toolkit';
 import { 
     Input,
     makeStyles,
@@ -10,6 +11,7 @@ import {
 // https://uiwjs.github.io/react-md-editor/
 import MDEditor from '@uiw/react-md-editor';
 import { saveNewArticle } from './ArticleSlice';
+import { RestoreOutlined } from '@material-ui/icons';
 
 const useStyles = makeStyles(theme => ({
     text: {
@@ -27,9 +29,15 @@ const ArticleForm = (props) => {
     const history = useHistory()
 
     const handleSubmit = async (event) => {
-        event.preventDefault()
-        await dispatch(saveNewArticle({title, content}))
-        history.push('/')
+        try {
+            event.preventDefault()
+            const resultAction = await dispatch(saveNewArticle({title, content}))
+            const result = unwrapResult(resultAction)
+            console.log(result.id)
+            history.push('/article/' + result.id)
+        } catch (rejectedValueOrSerializedError) {
+            throw(rejectedValueOrSerializedError)
+        }
     }
 
     return (

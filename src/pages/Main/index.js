@@ -17,15 +17,14 @@ const MainPage = () => {
             </Grid>
             <div className={classes.spacer} />
             <Grid container>
-                <Grid item xs={2} md={1} lg={1}>
-                    <LinkButton variant="contained" color="primary" component={Link} to="/article">
+                <Grid item xs={1} md={1} lg={1}>
+                    <LinkButton color="primary" component={Link} to="/article">
                         <Button variant="contained" color="primary">
                             글 쓰기 
                         </Button>
                     </LinkButton>
                 </Grid>
-                <Grid item xs={11} md={11} lg={11}>
-                    <div></div>
+                <Grid item xs={10} md={10} lg={10}>
                 </Grid>
             </Grid>
         </Container>
