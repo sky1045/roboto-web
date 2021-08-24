@@ -1,3 +1,4 @@
+import { UpdateRounded } from '@material-ui/icons'
 import { 
     createAsyncThunk,
     createSlice,
@@ -6,7 +7,8 @@ import {
 } from '@reduxjs/toolkit'
 import { 
     getArticles,
-    createArticle
+    createArticle,
+    putArticle
 } from './ArticleAPI'
 
 const articlesAdapter = createEntityAdapter()
@@ -23,6 +25,11 @@ export const fetchArticles = createAsyncThunk('articles/fetchArticles', async (p
 
 export const saveNewArticle = createAsyncThunk('articles/createArticle', async (data) => {
     const response = await createArticle(data)
+    return response.data
+})
+
+export const updateArticle = createAsyncThunk('articles/updateArticle', async (id, data) => {
+    const response = await putArticle(id, data)
     return response.data
 })
 
@@ -49,6 +56,14 @@ export const articleSlice = createSlice({
                 console.log(state.count)
             })
             .addCase(saveNewArticle.fulfilled, articlesAdapter.addOne)
+            .addCase(updateArticle.pending, (state) => {
+                state.status = 'loading'
+            })
+            .addCase(updateArticle.fulfilled, (state, action) => {
+                const {id} = action.payload
+                state.articles[id] = action.payload
+                state.loading = 'idle'
+            })
     }
 })
 

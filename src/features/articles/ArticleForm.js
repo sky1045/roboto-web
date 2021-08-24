@@ -23,12 +23,24 @@ const useStyles = makeStyles(theme => ({
 
 const ArticleForm = (props) => {
     const classes = useStyles()
-    const [title, setTitle] = useState("")
-    const [content, setContent] = useState("## MarkDown으로 작성해주세요");
+    const { article } = props
+    const [title, setTitle] = useState(() => {
+        if (!!article) {
+            return article.title
+        }
+        return ""
+    })
+    const [content, setContent] = useState(() => {
+        if (!!article) {
+            return article.content
+        }
+        return "## MarkDown으로 작성해주세요"
+    });
     const dispatch = useDispatch()
     const history = useHistory()
 
     const handleSubmit = async (event) => {
+        // update or create
         try {
             event.preventDefault()
             const resultAction = await dispatch(saveNewArticle({title, content}))
@@ -71,7 +83,7 @@ const ArticleForm = (props) => {
                 color="primary"
                 className={classes.button}
             >
-                글 쓰기
+               작성 완료 
             </Button>
         </form>
     )

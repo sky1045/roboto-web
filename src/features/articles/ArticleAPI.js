@@ -24,8 +24,17 @@ const createArticle = async (data) => {
     }
 }
 
+const updateArticle = async(id, data) => {
+    try {
+        return await axios.put('http://localhost:8080/article' + id, data)
+    } catch(err) {
+        throw err
+    }
+}
+
 export {
     getArticles,
     getArticle,
-    createArticle
+    createArticle,
+    updateArticle as putArticle
 }
